@@ -1,6 +1,7 @@
 
 vim $( grep -r require * | cut -f1 -d: )
-
+set cpoptions+=$ # add the $ to the end of the cw
+set virtualedit=all
 
 # vim completions
 # insert mode
@@ -75,3 +76,29 @@ c-w H, c-w J, # move a window left(H), up(J), down(K), right(L)
 c-w K, c-w L
 c-w p         # goes to the previous window
 
+
+# insert modes
+I # insert mode at the beginng of the line
+A # insert at the end of the line
+o # insert after the cursoer
+O # insert before the cursor
+C # change to the end of the line
+r # replace 1 character
+R # replace 
+
+
+# yank paste etc.
+yy # yank
+Y # yank linke
+p # paste after cursor
+P # paste before cursor
+v # enter linewise block mode
+V # enter visual line mode
+c-v # enter into visula block mode
+gv # repeat the last visual block
+
+    # macros
+qa  # start recording a macro
+q   # end the macro
+@a  # repeat the macro
+c-a # not sure what this does...seems to be able to increment 20c-a
