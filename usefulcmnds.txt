@@ -1,0 +1,77 @@
+
+vim $( grep -r require * | cut -f1 -d: )
+
+
+# vim completions
+# insert mode
+c-x-l # full line completion
+c-n   # compluetion based on next usage
+c-p   # completion based on previous useage
+c-f   # path completion inside vim
+
+   # vim momvements
+0  # takes you to the beginning of the line
+$  # takes you to the end of the line
+w  # jump workds
+W  # jump works based on spaces
+e  # jump to the end of the word
+E  # jump to the end of the word based on spaces
+b  # go back a word beginning of word
+B  # go back a word based on spaces, beginning of word
+ge # bo back word end of word
+gE # go back word end of word, beginning of word
+
+        # jump via searching char
+f<char> # first character found on line
+F<char> # first character found on line going backwards
+t<char> # 'til character before first character found on line.
+T<char> # 'til character before first character found on line going backwards.
+;       # repeat the f, F, t, T searh command
+
+     # jump via paging
+c-f  # forware full page
+c-b  # backward full page
+c-U  # up half page
+c-D  # down half page
+H    # jump to the head of the page
+M    # jump to the middle of the page
+L    # jump to the end of the page without scrolling
+gg   # go to the top of the file
+G    # go to the bottom of the file
+
+   # jump via searching pt2, word based
+/  # search on the chadr
+?  # seacrh bachwards
+*  # search on the word under the cursor
+g* # search without the word boundaries
+n  # go forward during search
+N  # go backward durig search
+'# #search backwards
+
+             # jump via brackets
+], [, ][, [] # go forward, backward to next bracket
+%            # go to matching bracket
+
+      # setting and jumping to marks
+ma    # mark a line
+makrs # show all makrs
+'a    # go to a mark on the beginning of the column
+`a    # go to mark on exact column
+''    # go to the last place you were
+
+# to check later
+# bufdo
+# argslist can apply chagnes to a list of files
+#
+
+              # working with windows
+c-w o         # keep 'only' one window
+c-w x         # switch between 2 different windows
+:split, :sp   # split the vim horizontally
+c-w v         # vertical split
+:vsp, :vsplit # vertical split
+c-w c         # close a window
+c-w H, c-w J, # move a window left(H), up(J), down(K), right(L)
+c-w K, c-w L
+c-w p         # goes to the previous window
+
