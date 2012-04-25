@@ -1,7 +1,17 @@
-
 vim $( grep -r require * | cut -f1 -d: )
-set cpoptions+=$ # add the $ to the end of the cw
-set virtualedit=all
+
+# find an path
+set path=~/<pathhere>/**
+:find DTD.m
+add an autocommand to update find
+
+# command history
+q: # open the commdn history
+q/ # search the command history
+q? # alternative q/
+
+# delete non matching
+:v/<text>/d or :g!/<text>/d
 
 # vim completions
 # insert mode
@@ -9,6 +19,12 @@ c-x-l # full line completion
 c-n   # compluetion based on next usage
 c-p   # completion based on previous useage
 c-f   # path completion inside vim
+
+# set vim to a filetype
+set ft=xml
+
+#global substitue
+:%s/^\(\s*\).TEXT="\([^"]*\)".*$/\1/
 
    # vim momvements
 0  # takes you to the beginning of the line
@@ -84,7 +100,7 @@ o # insert after the cursoer
 O # insert before the cursor
 C # change to the end of the line
 r # replace 1 character
-R # replace 
+R # replace
 
 
 # yank paste etc.

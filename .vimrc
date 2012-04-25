@@ -38,6 +38,30 @@ set smartcase
 nnoremap ; :
 nnoremap : ;
 
+" make sure that the backups dont pollute the fs
 set backup
 set backupdir=~/.vim/backup
 set directory=~/.vim/tmp
+
+" just a nice way to indicate ent ehd of the insert register
+set cpoptions+=$ " add the $ to the end of the cw
+set virtualedit=all
+
+" allow for moving between unsaved buffers
+set hidden
+
+" Don't update the display while executing macros
+set lazyredraw
+
+" At least let yourself know what mode you're in
+set showmode
+
+" Set the status line the way I like it
+set stl=%f\ %m\ %r\ Line:\ %l/%L[%p%%]\ Col:\ %c\ Buf:\ #%n\ [%b][0x%B]
+
+" tell Vim to always put a status line in, even if there is only one
+" window
+set laststatus=2
+
+" Hide the mouse pointer while typing
+set mousehide
