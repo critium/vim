@@ -2,18 +2,21 @@ call pathogen#infect()
 syntax on
 filetype plugin indent on
 
+" Swap ; and :  Convenient.
+nnoremap ; :
+nnoremap : ;
+
+" set tabstops
 set tabstop=2
 set shiftwidth=2
 set expandtab
 set smarttab
 
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
+" Ignoring case is a fun trick
+set ignorecase
 
-" Remove any trailing whitespace that is in the file
-autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+" And so is Artificial Intellegence!
+set smartcase
 
 " Necesary  for lots of cool vim things
 set nocompatible
@@ -27,16 +30,6 @@ set wildmode=list:longest,full
 
 " Line Numbers PWN!
 set number
-
-" Ignoring case is a fun trick
-set ignorecase
-
-" And so is Artificial Intellegence!
-set smartcase
-
-" Swap ; and :  Convenient.
-nnoremap ; :
-nnoremap : ;
 
 " make sure that the backups dont pollute the fs
 set backup
@@ -65,3 +58,39 @@ set laststatus=2
 
 " Hide the mouse pointer while typing
 set mousehide
+
+
+"""""""""""" AUTOCMNDS AND DISPLAY STUFF """""""""""""""""
+
+" yummy
+colors desert
+
+" i like this font
+if has("gui_running")
+  if has("gui_gtk2")
+    set guifont=Inconsolata\ 12
+  elseif has("gui_win32")
+    set guifont=Consolas:h9:cANSI
+  endif
+endi
+
+
+" disable JSLINT by default
+" :JSLintToggle
+let g:JSLintHighlightErrorLine = 0
+
+" minibuf stuff
+let g:miniBufExplorerMoreThanOne = 0
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
+
+" set JSON to javascript filetype
+autocmd BufNewFile,BufRead *.json set ft=javascript
+
+" Remove any trailing whitespace that is in the file
+autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+
+" use nerdtree
+autocmd vimenter * NERDTree
