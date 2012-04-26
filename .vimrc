@@ -92,5 +92,4 @@ autocmd BufNewFile,BufRead *.json set ft=javascript
 " Remove any trailing whitespace that is in the file
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
-" use nerdtree
-autocmd vimenter * NERDTree
+" use nerdtree " autocmd vimenter * NERDTree
