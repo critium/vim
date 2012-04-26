@@ -45,7 +45,7 @@ set directory=~/.vim/tmp
 
 " just a nice way to indicate ent ehd of the insert register
 set cpoptions+=$ " add the $ to the end of the cw
-set virtualedit=all
+set virtualedit=all " allow to go to places no other editor can go
 
 " allow for moving between unsaved buffers
 set hidden
