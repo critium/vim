@@ -123,3 +123,47 @@ c-a # not sure what this does...seems to be able to increment 20c-a
 # argslist can apply chagnes to a list of files
 #
 
+"""""""""""""""""""""""""""""""
+" Nerd Commenter key bindings "
+"""""""""""""""""""""""""""""""
+"Comment out the current line or text selected in visual mode.
+[count]<leader>cc |NERDComComment|
+
+"Same as <leader>cc but forces nesting.
+[count]<leader>cn |NERDComNestedComment|
+
+"Toggles the comment state of the selected line(s). If the topmost selected line is commented, all selected lines are uncommented and vice versa.
+[count]<leader>c |NERDComToggleComment|
+
+"Comments the given lines using only one set of multipart delimiters.
+[count]<leader>cm |NERDComMinimalComment|
+
+"Toggles the comment state of the selected line(s) individually.
+[count]<leader>ci |NERDComInvertComment|
+
+"Comments out the selected lines ``sexily''
+[count]<leader>cs |NERDComSexyComment|
+
+"Same as <leader>cc except that the commented line(s) are yanked first.
+[count]<leader>cy |NERDComYankComment|
+
+"Comments the current line from the cursor to the end of line.
+<leader>c$ |NERDComEOLComment|
+
+"Adds comment delimiters to the end of line and goes into insert mode between them.
+<leader>cA |NERDComAppendComment|
+
+"Adds comment delimiters at the current cursor position and inserts between. Disabled by default.
+"|NERDComInsertComment|
+
+""Switches to the alternative set of delimiters.
+<leader>ca |NERDComAltDelim|
+
+""Same as |NERDComComment| except that the delimiters are aligned down the left side (<leader>cl) or both sides (<leader>cb).
+[count]<leader>cl
+[count]<leader>cb |NERDComAlignedComment|
+
+""Uncomments the selected line(s).
+[count]<leader>cu |NERDComUncommentLine|
+
+
