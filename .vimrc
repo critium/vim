@@ -1,3 +1,49 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Necesary  for lots of cool vim things
+" Need this on top or else get all sorts of stupid errors on startup
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible
+
+
+"""""""""""""""""""""""""""
+" Boilerplate for windows "
+"""""""""""""""""""""""""""
+
+"g:my_vim_dir is used elsewhere in my vim configurations
+let g:my_vim_dir=expand("$USERPROFILE/.vim")
+
+"$HOME/.vim and $HOME/.vim/after are in the &rtp on unix
+"But on windows, they need to be added.
+if has("win16") || has("win32") || has("win64")
+  "add g:my_vim_dir to the front of the runtimepath
+  execute "set rtp^=".g:my_vim_dir
+
+  "add g:my_vim_dir\after to the end of the runtimepath
+  execute "set rtp+=".g:my_vim_dir."\\after"
+
+  "Note, pathogen#infect() looks for the 'bundle' folder in each path
+  "of the &rtp, where the last dir in the '&rtp path' is not 'after'. The
+  "<path>\bundle\*\after folders will be added if and only if
+  "the corresponding <path>\after folder is in the &rtp before
+  "pathogen#infect() is called.  So it is very important to add the above
+  "'after' folder.
+  "(This applies to vim plugins such as snipmate, tabularize, etc.. that
+  " are loaded by pathogen (and perhaps vundle too.))
+
+  " Not necessary, but I like to cleanup &rtp to use \ instead of /
+  " when on windows machines
+  let &rtp=substitute(&rtp,"[/]","\\","g")
+
+  "On windows, if called from cygwin or msys, the shell needs to be changed
+  "to cmd.exe to work with certain plugins that expect cmd.exe on windows versions
+  "of vim.
+  if &shell=~#'bash$'
+    set shell=$COMSPEC " sets shell to correct path for cmd.exe
+  endif
+endif
+
+
+
 """"""""""""""""""""""
 " package management "
 """"""""""""""""""""""
@@ -11,7 +57,7 @@ filetype plugin indent on
 " vundle stuff
 filetype on
 filetype off
-set rtp+=~/.vim/bundle/vundle/
+execute "set rtp+=".g:my_vim_dir."/bundle/vundle/"
 call vundle#rc()
 
 " let Vundle manage Vundle
@@ -133,8 +179,6 @@ set ignorecase
 " And so is Artificial Intellegence!
 set smartcase
 
-" Necesary  for lots of cool vim things
-set nocompatible
 
 " This shows what you are typing as a command.  I love this!
 set showcmd
@@ -148,8 +192,11 @@ set number
 
 " make sure that the backups dont pollute the fs
 set backup
-set backupdir=~/.vim/backup
-set directory=~/.vim/tmp
+execute "set backupdir=".g:my_vim_dir."/backup"
+execute "set directory=".g:my_vim_dir."/tmp"
+execute "set undodir=".g:my_vim_dir."/undo"
+"set backupdir=~/.vim/backup
+"set directory=~/.vim/tmp
 
 " just a nice way to indicate ent ehd of the insert register
 set cpoptions+=$ " add the $ to the end of the cw
@@ -215,7 +262,7 @@ if has("gui_running")
     "set guifont=Inconsolata-dz_for_Powerline:h9:cANSI
   elseif has("gui_win32")
     " set guifont=Consolas:h13:cANSI
-    set guifont=Inconsolata-dz_for_Powerline:h9:cANSI
+    set guifont=Inconsolata-dz_for_Powerline:h11:cANSI
   endif
 endi
 
