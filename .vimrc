@@ -1,49 +1,3 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Necesary  for lots of cool vim things
-" Need this on top or else get all sorts of stupid errors on startup
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible
-
-
-"""""""""""""""""""""""""""
-" Boilerplate for windows "
-"""""""""""""""""""""""""""
-
-"g:my_vim_dir is used elsewhere in my vim configurations
-let g:my_vim_dir=expand("$USERPROFILE/.vim")
-
-"$HOME/.vim and $HOME/.vim/after are in the &rtp on unix
-"But on windows, they need to be added.
-if has("win16") || has("win32") || has("win64")
-  "add g:my_vim_dir to the front of the runtimepath
-  execute "set rtp^=".g:my_vim_dir
-
-  "add g:my_vim_dir\after to the end of the runtimepath
-  execute "set rtp+=".g:my_vim_dir."\\after"
-
-  "Note, pathogen#infect() looks for the 'bundle' folder in each path
-  "of the &rtp, where the last dir in the '&rtp path' is not 'after'. The
-  "<path>\bundle\*\after folders will be added if and only if
-  "the corresponding <path>\after folder is in the &rtp before
-  "pathogen#infect() is called.  So it is very important to add the above
-  "'after' folder.
-  "(This applies to vim plugins such as snipmate, tabularize, etc.. that
-  " are loaded by pathogen (and perhaps vundle too.))
-
-  " Not necessary, but I like to cleanup &rtp to use \ instead of /
-  " when on windows machines
-  let &rtp=substitute(&rtp,"[/]","\\","g")
-
-  "On windows, if called from cygwin or msys, the shell needs to be changed
-  "to cmd.exe to work with certain plugins that expect cmd.exe on windows versions
-  "of vim.
-  if &shell=~#'bash$'
-    set shell=$COMSPEC " sets shell to correct path for cmd.exe
-  endif
-endif
-
-
-
 """"""""""""""""""""""
 " package management "
 """"""""""""""""""""""
@@ -57,33 +11,36 @@ filetype plugin indent on
 " vundle stuff
 filetype on
 filetype off
-execute "set rtp+=".g:my_vim_dir."/bundle/vundle/"
+set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
 " required!
 Bundle 'gmarik/vundle'
+"
 " Vundle Bundles
+Bundle 'mxw/vim-jsx'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
-"Bundle 'rudolph9/vim-tabular'
+Bundle 'tpope/vim-dispatch'
+Bundle 'tpope/vim-abolish'
+Bundle 'dhruvasagar/vim-vinegar'
 Bundle 'godlygeek/tabular'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'flazz/vim-colorschemes'
 Bundle 'majutsushi/tagbar'
 Bundle 'Lokaltog/vim-powerline'
-Bundle 'The-NERD-Commenter'
 Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'pangloss/vim-javascript'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'Raimondi/delimitMate'
-"Bundle 'vim-scripts/delimitMate.vim'
 Bundle 'vim-scripts/loremipsum'
 Bundle 'vim-scripts/Workspace-Manager'
 Bundle 'vim-scripts/AnsiEsc.vim'
-Bundle 'vim-scripts/grep.vim'
-"Bundle 'mikelue/vim-maven-plugin'
+"Bundle 'vim-scripts/grep.vim'
+Bundle 'vim-scripts/jade.vim'
 Bundle 'gre/play2vim'
 Bundle 'javacomplete'
 Bundle 'matchit.zip'
@@ -93,13 +50,19 @@ Bundle 'vim-scripts/dbext.vim'
 Bundle 'scratch.vim'
 Bundle 'triglav/vim-visual-increment'
 Bundle 'nathanaelkane/vim-indent-guides'
-"Bundle 'Valloric/YouCompleteMe'
-""Bundle 'scrooloose/syntastic'
-"Bundle 'marijnh/tern_for_vim'
-"
+Bundle 'wesQ3/vim-windowswap'
+Bundle 'csv.vim'
+Bundle 'LargeFile'
+Bundle 'scrooloose/syntastic'
+Bundle 'zmre/vim-scala-async-integration'
+Bundle 'luochen1990/rainbow'
+
 
 "disable the follwing until i learn how to use them"
-" Bundle 'lukaszb/vim-web-indent'
+"Bundle 'Valloric/YouCompleteMe'
+"Bundle 'marijnh/tern_for_vim'
+"Plugin 'ensime/ensime-vim'
+"Bundle 'lukaszb/vim-web-indent'
 "Bundle 'rosenfeld/conque-term'
 "Bundle 'ShowMarks'
 "Bundle 'scrooloose/syntastic'
@@ -107,6 +70,7 @@ Bundle 'nathanaelkane/vim-indent-guides'
 ""Bundle 'yankrink.vim'
 ""Bundle 'jpalardy / vim-slime'
 ""Bundle 'msanders/snipmate.vim'
+"Bundle 'mikelue/vim-maven-plugin'
 
 
 
@@ -179,6 +143,8 @@ set ignorecase
 " And so is Artificial Intellegence!
 set smartcase
 
+" Necesary  for lots of cool vim things
+set nocompatible
 
 " This shows what you are typing as a command.  I love this!
 set showcmd
@@ -192,11 +158,8 @@ set number
 
 " make sure that the backups dont pollute the fs
 set backup
-execute "set backupdir=".g:my_vim_dir."/backup"
-execute "set directory=".g:my_vim_dir."/tmp"
-execute "set undodir=".g:my_vim_dir."/undo"
-"set backupdir=~/.vim/backup
-"set directory=~/.vim/tmp
+set backupdir=~/.vim/backup
+set directory=~/.vim/tmp
 
 " just a nice way to indicate ent ehd of the insert register
 set cpoptions+=$ " add the $ to the end of the cw
@@ -257,12 +220,19 @@ endif
 if has("gui_running")
   if has("gui_gtk2")
     set guifont=Inconsolata\ 18
+  elseif has("gui_vimr")
+    set guifont=Consolas:h11
+    " set guifont=Monoid\ Retina:h8
+    " set guifont=Inconsolata-dz_for_Powerline:h9:cANSI
   elseif has("gui_macvim")
-    set guifont=Consolas:h12
-    "set guifont=Inconsolata-dz_for_Powerline:h9:cANSI
+    " set guifont=Consolas:h11
+    " set guifont=Monoid\ Retina:h8
+    " set guifont=Inconsolata-dz_for_Powerline:h9:cANSI
+    set guifont=Menlo\ Regular\ for\ Powerline\ for\ Powerline:h11
+    colors desert
   elseif has("gui_win32")
     " set guifont=Consolas:h13:cANSI
-    set guifont=Inconsolata-dz_for_Powerline:h11:cANSI
+    set guifont=Inconsolata-dz_for_Powerline:h9:cANSI
   endif
 endi
 
@@ -277,13 +247,20 @@ autocmd BufNewFile,BufRead *.json set ft=javascript
 " Remove any trailing whitespace that is in the file
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
-autocmd Filetype java setl makeprg=play_compile
-autocmd Filetype java setl efm=%A\ %#[error]\ %f:%l:\ %m,%-Z\ %#[error]\ %p^,%-C%.%#
+"autocmd Filetype java setl makeprg=play_compile
+"autocmd Filetype java setl efm=%A\ %#[error]\ %f:%l:\ %m,%-Z\ %#[error]\ %p^,%-C%.%#
 "autocmd FileType java setl tabstop=4 sw=4 sts=4 noet
-autocmd FileType java setl tabstop=4 sw=4 sts=4
+"autocmd FileType java setl tabstop=4 sw=4 sts=4
 
-autocmd Filetype scala setl makeprg=play_compile
-autocmd Filetype scala setl efm=%A\ %#[error]\ %f:%l:\ %m,%-Z\ %#[error]\ %p^,%-C%.%#
+autocmd Filetype scala setl makeprg=sbt_compile
+"autocmd Filetype scala setl efm=%A\ %#[error]\ %f:%l:\ %m,%-Z\ %#[error]\ %p^,%-C%.%#
+"autocmd Filetype scala setl efm=%A\ %#[error]\ %f:%l:\ %m,%-Z\ %#[error]\ %p^,%-C%.%#
+"autocmd Filetype scala setl efm=
+      "\ %E%f:%l: %trror: %m,%Z%p^,%-G%.%#
+autocmd Filetype scala setl errorformat=
+      \%E\ %#[error]\ %f:%l:\ %m,%C\ %#[error]\ %p^,%-C%.%#,%Z,
+      \%W\ %#[warn]\ %f:%l:\ %m,%C\ %#[warn]\ %p^,%-C%.%#,%Z,
+
 
 "autocmd FileType javascript setl tabstop=2 sw=2 sts=2 noet
 autocmd FileType javascript setl tabstop=2 sw=2 sts=2
@@ -378,7 +355,7 @@ let g:SuperTabContextDiscoverDiscovery =
 """"""""""""""""""
 let g:ctrlp_root_markers = ['src/', 'pom.xml']
 let g:ctrlp_custom_ignore = {
-			\ 'dir':  '\v[\/]\.(git|hg|svn)$|\v[\/]target$|\v[\/]deploy$',
+      \ 'dir': '\v[\/](node_modules|target|dist|deploy)|(\.(swp|ico|git|svn))$',
 			\ 'file': '\v\.(exe|so|dll|class)$',
 			\ 'link': 'some_bad_symbolic_links',
 			\ }
@@ -541,3 +518,14 @@ nmap <Leader>bb :CtrlPBuffer<CR>
 
 " Temporarily disable this for now until I figure out how to get it running
 "au FileType java :so /users/pule/.vim/opt/javakit/vim/javakit.vim
+
+
+
+" jsx plugin, not require the jsx ext
+let g:jsx_ext_required = 0
+
+" rainbo parens
+let g:rainbow_active = 1
+
+" ensime error style
+let EnErrorStyle='EnError'
