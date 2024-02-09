@@ -5,12 +5,13 @@ vim.cmd("nnoremap : ;")
 -- prefer vertical to horizontal split on diff
 vim.cmd("set diffopt=vertical")
 
+vim.cmd("let mapleader = ','")
+
 --------------------------
 -- General Vim Settings --
 --------------------------
 vim.cmd("set laststatus=2")
 vim.cmd("set encoding=utf-8")
--- why not?
 vim.cmd("syntax on")
 
 -- set tabstops and show whitespaces
