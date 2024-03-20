@@ -2,6 +2,9 @@
 vim.cmd("nnoremap ; :")
 vim.cmd("nnoremap : ;")
 
+-- map go back a file
+vim.cmd("nnoremap !! :b#<CR>")
+
 -- prefer vertical to horizontal split on diff
 vim.cmd("set diffopt=vertical")
 
@@ -25,8 +28,25 @@ vim.cmd([[
   set ci
   set pi
   set sts=0
+  set nofixeol
+  set nofixendofline
 ]])
 
+-- easier split navigations
+vim.cmd([[
+  nnoremap <C-J> <C-W><C-J>
+  nnoremap <C-K> <C-W><C-K>
+  nnoremap <C-L> <C-W><C-L>
+  nnoremap <C-H> <C-W><C-H>
+  nnoremap <C-I> <C-W>10>
+]])
+
+
+-- Remove whitespace on save
+autocmd('BufWritePre', {
+  pattern = '',
+  command = ":%s/\\s\\+$//e"
+})
 
 -- set the color column @ 120
 vim.cmd("set colorcolumn=120")
@@ -59,7 +79,9 @@ vim.cmd("set hidden")
 vim.cmd("set mousehide")
 
 -- highlight the cursor ilne and columen"
-vim.cmd("noremap <leader>cl set cursorline<cr> set cursorcolumn<cr>")
+vim.cmd("noremap <leader>tc :set cursorline!<cr> :set cursorcolumn!<cr>")
+vim.cmd("set cursorline")
+vim.cmd("set cursorcolumn")
 
 -- ndofile for even files that are closed by accident"
 vim.cmd([[
